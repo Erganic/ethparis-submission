@@ -14,10 +14,12 @@
     "@ethereum-attestation-service/eas-sdk": "^0.28.2",
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@rainbow-me/rainbowkit": "^1.0.7",
     "@types/node": "20.1.2",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "@types/three": "^0.152.0",
+    "@walletconnect/ethereum-provider": "^2.9.1",
     "blockies": "^0.0.2",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
@@ -34,7 +36,8 @@
     "react-transition-group": "^4.4.5",
     "three": "^0.152.2",
     "three-spritetext": "^1.8.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "web3": "^4.0.3"
   },
   "devDependencies": {
     "@types/react-transition-group": "^4.4.6",

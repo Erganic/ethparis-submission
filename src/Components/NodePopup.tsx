@@ -3,10 +3,6 @@ import './NodePopupStyle.css'
 import { ApolloClient, gql, InMemoryCache, useQuery } from '@apollo/client';
 import { ethers } from 'ethers';
 
-
-
-
-
 interface PopupProps {
     node: any
     attestationId: string
