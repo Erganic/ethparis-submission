@@ -60,8 +60,10 @@ contract RoyaltyManager {
      */
     function buyLicense(bytes32 _artworkId, uint256 amount) external {
         Attestation memory attestation = eas.getAttestation(_artworkId);
+        require(amount == _getPrice(attestation.data), "Invalid price");
         uint256 tempAmount = amount;
         emit LicensePurchased(_artworkId, amount);
+        token.transferFrom(msg.sender, address(this), amount);
 
 
         if (attestation.refUID == 0) {
@@ -91,8 +93,8 @@ contract RoyaltyManager {
         emit Withdraw(_artist, _amount);
     }  
 
-    function decodeData(bytes memory data) pure public returns(address, string memory, string memory){
-        (address creator, string memory ipfs, string memory license) = abi.decode(data, (address,string,string));
-        return (creator,ipfs,license);
+    function _getPrice(bytes memory data) pure public returns(uint256){
+        (,,uint256 price) = abi.decode(data, (string, string, uint256));
+        return (price);
    }
 }
