@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity 0.8.19;
 import { EAS } from "eas-contracts/EAS.sol";
 import { Attestation } from "eas-contracts/Common.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -22,6 +22,8 @@ contract Distributor {
 
     /**
         @notice Consturctor of this smart contract.
+        @param _easAddress The address of the EAS smart contract.
+        @param _tokenAddress The address of the token smart contract.
      */
 
     constructor(address _easAddress, address _tokenAddress) { 
@@ -47,7 +49,7 @@ contract Distributor {
             balance[attestation.attester] = tempAmount / 50;
             tempAmount = tempAmount / 50;
             _artworkId = attestation.refUID;
-            attestation = getAttestation(_artworkId);
+            attestation = eas.getAttestation(_artworkId);
         }
 
     }
@@ -62,4 +64,9 @@ contract Distributor {
         balance[_artist] -= _amount;
         token.transfer(_artist, _amount);
     }  
+
+    function decodeData(bytes memory data) pure public returns(address, uint256){
+        (address creator, string storage ipfs, string storage license) = abi.decode(data, (address,string,string));
+        return (creator,ipfs,license);
+   }
 }

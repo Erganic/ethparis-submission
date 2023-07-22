@@ -3,4 +3,7 @@ src = 'src'
 out = 'out'
 libs = ['lib']
 
+[rpc_endpoints]
+"sepolia" = "https://sepolia.infura.io/v3/60becffe08954e0dbd3de782bfe31d8e"
+
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
