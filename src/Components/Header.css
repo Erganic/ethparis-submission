@@ -1,0 +1,16 @@
+.header {
+    background-color: #f1f1f1;
+    padding: 1rem;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav li {
+    margin: 0 1rem;
+    cursor: pointer;
+  }
