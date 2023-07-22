@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
 import { IEAS } from "eas-contracts/IEAS.sol";
 import { Attestation } from "eas-contracts/Common.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -17,15 +18,36 @@ contract RoyaltyManager {
 
     /**
         @notice Mapping of the artists' addresses to their royalties.
-     */
+    */
     mapping(address => uint256) public balance;
+
+    /**
+        @notice Event emitted when the user buys the license of the artwork.
+        @param artworkId The uid of attestation record of the purhchased artwork.
+        @param amount The price of the purchased artwork.
+    */
+    event LicensePurchased(bytes32 indexed artworkId, uint256 amount);
+
+    /**
+        @notice Event emitted when artist's balance is updated.
+        @param artist The address of the artist.
+        @param amount The amount of the royalties trasnferred to the artist.
+        @param artworkId The uid of attestation record of the purchased artwork.
+    */
+    event BalanceUpdated(address indexed artist, uint256 amount, bytes32 indexed artworkId);
+
+    /**
+        @notice Event emitted when the artist withdraws their royalties.
+        @param artist The address of the artist.
+        @param amount The amount of the royalties.
+    */
+    event Withdraw(address indexed artist, uint256 amount);
 
     /**
         @notice Consturctor of this smart contract.
         @param _easAddress The address of the EAS smart contract.
         @param _tokenAddress The address of the token smart contract.
-     */
-
+    */
     constructor(address _easAddress, address _tokenAddress) { 
         eas = IEAS(_easAddress);
         token = IERC20(_tokenAddress);
@@ -39,9 +61,12 @@ contract RoyaltyManager {
     function buyLicense(bytes32 _artworkId, uint256 amount) external {
         Attestation memory attestation = eas.getAttestation(_artworkId);
         uint256 tempAmount = amount;
+        emit LicensePurchased(_artworkId, amount);
+
 
         if (attestation.refUID == 0) {
             balance[attestation.attester] += tempAmount;
+            emit BalanceUpdated(attestation.attester, tempAmount, _artworkId);
             return; // Exit the function after allocating funds to the attester
         }
 
@@ -50,8 +75,8 @@ contract RoyaltyManager {
             tempAmount = tempAmount / 50;
             _artworkId = attestation.refUID;
             attestation = eas.getAttestation(_artworkId);
+            emit BalanceUpdated(attestation.attester, tempAmount, _artworkId);
         }
-
     }
 
     /**
@@ -63,6 +88,7 @@ contract RoyaltyManager {
         require(balance[_artist] >= _amount, "Insufficient balance");
         balance[_artist] -= _amount;
         token.transfer(_artist, _amount);
+        emit Withdraw(_artist, _amount);
     }  
 
     function decodeData(bytes memory data) pure public returns(address, string memory, string memory){
