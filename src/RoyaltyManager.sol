@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import { IEAS } from "eas-contracts/IEAS.sol";
 import { Attestation } from "eas-contracts/Common.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "forge-std/console.sol";
 
 /**
     @title Ergonomic
@@ -61,9 +62,12 @@ contract RoyaltyManager {
     function buyLicense(bytes32 _artworkId, uint256 amount) external {
         Attestation memory attestation = eas.getAttestation(_artworkId);
         require(amount == _getPrice(attestation.data), "Invalid price");
+        console.log("Amount passed correctly");
         uint256 tempAmount = amount;
+        console.log("tempAmount: %d", tempAmount);
         emit LicensePurchased(_artworkId, amount);
         token.transferFrom(msg.sender, address(this), amount);
+        console.log("Transfer successful");
 
 
         if (attestation.refUID == 0) {
@@ -93,8 +97,21 @@ contract RoyaltyManager {
         emit Withdraw(_artist, _amount);
     }  
 
-    function _getPrice(bytes memory data) pure public returns(uint256){
+    /**
+        @notice Helper function to get the price of the artwork from data tuple from Attestations sturct
+        @param data The data tuple from Attestations sturct
+     */
+    function getPrice(bytes memory data) pure public returns(uint256){
         (,,uint256 price) = abi.decode(data, (string, string, uint256));
         return (price);
    }
+
+   /**
+        @notice Function that can be called by the frontned or users directly to get the balance of particular artist
+        @param _artist The address of the artist
+    */
+    function getBalance(address _artist) external view returns(uint256) {
+        return balance[_artist];
+    }
+
 }
