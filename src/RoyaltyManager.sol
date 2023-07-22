@@ -1,6 +1,6 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.19;
-import { EAS } from "eas-contracts/EAS.sol";
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import { IEAS } from "eas-contracts/IEAS.sol";
 import { Attestation } from "eas-contracts/Common.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
 
@@ -10,9 +10,9 @@ import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
     contributed to the creation of purchased artwork.
 */
 
-contract Distributor {
+contract RoyaltyManager {
 
-    EAS public eas;
+    IEAS public eas;
     IERC20 public token;
 
     /**
@@ -27,8 +27,8 @@ contract Distributor {
      */
 
     constructor(address _easAddress, address _tokenAddress) { 
-        eas = new EAS(_easAddress);
-        token = new IERC20(_tokenAddress);
+        eas = IEAS(_easAddress);
+        token = IERC20(_tokenAddress);
     }
 
     /**
@@ -36,9 +36,9 @@ contract Distributor {
         update the balances of all artisits who have contributed to the branch of the artwork.
         @param _artworkId The uid of attestation record of the purhchased artwork.
      */
-    function buyLicense(uint256 _artworkId, uint256 amount) external {
+    function buyLicense(bytes32 _artworkId, uint256 amount) external {
         Attestation memory attestation = eas.getAttestation(_artworkId);
-        uint256 tempAmount;
+        uint256 tempAmount = amount;
 
         if (attestation.refUID == 0) {
             balance[attestation.attester] += tempAmount;
@@ -65,8 +65,8 @@ contract Distributor {
         token.transfer(_artist, _amount);
     }  
 
-    function decodeData(bytes memory data) pure public returns(address, uint256){
-        (address creator, string storage ipfs, string storage license) = abi.decode(data, (address,string,string));
+    function decodeData(bytes memory data) pure public returns(address, string memory, string memory){
+        (address creator, string memory ipfs, string memory license) = abi.decode(data, (address,string,string));
         return (creator,ipfs,license);
    }
 }
