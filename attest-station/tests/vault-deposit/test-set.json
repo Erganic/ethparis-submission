@@ -1,0 +1,44 @@
+[
+    [
+    {
+        "name": "chainId",
+        "value": 1,
+        "type": "uint32"
+    },
+    {
+        "name": "beneficiary",
+        "value": "0xdeadbeef",
+        "type": "address"
+    },
+    {
+        "name": "vault",
+        "value": "0xdeadbeef",
+        "type": "address"
+    },
+    {
+        "name": "amount",
+        "value": 420,
+        "type": "uint256"
+    }
+    ],
+    [{
+        "name": "chainId",
+        "value": 1,
+        "type": "uint32"
+    },
+    {
+        "name": "beneficiary",
+        "value": "0xdeadbeef",
+        "type": "address"
+    },
+    {
+        "name": "vault",
+        "value": "0xdeadbeef",
+        "type": "address"
+    },
+    {
+        "name": "amount",
+        "value": 420,
+        "type": "uint256"
+    }]
+]
