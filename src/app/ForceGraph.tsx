@@ -58,8 +58,8 @@ export default function ForceGraph() {
         const addresses: Set<string> = attestations
           .reduce(
             (acc: Set<string>, attestation: any) => {
-              acc.add(attestation.reciatpient)
               acc.add(attestation.attester)
+              acc.add(attestation.recipient)
               return acc
             }, new Set()
           )
@@ -67,7 +67,7 @@ export default function ForceGraph() {
         setGraph({
           nodes: [
             ...Array.from(addresses).map((address: string) => {
-              const correspondingAttestation = attestations.find((attestation: any) => attestation.recipient === address || attestation.attester === address);
+              const correspondingAttestation = attestations.find((attestation: any) => attestation.attester === address || attestation.recipient === address);
               const attestationId = correspondingAttestation ? correspondingAttestation.id : null;
 
               return {
@@ -82,7 +82,7 @@ export default function ForceGraph() {
             ...attestations.map((attestation: any) => {
               return {
                 source: attestation.attester,
-                target: attestation.recepiet,
+                target: attestation.recipient,
                 type: attestation.schemaId,
               }
             }),
