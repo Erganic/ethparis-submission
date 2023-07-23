@@ -1,0 +1,18 @@
+[
+    {
+        "name": "chainId",
+        "type": "uint32"
+    },
+    {
+        "name": "beneficiary",
+        "type": "address"
+    },
+    {
+        "name": "vault",
+        "type": "address"
+    },
+    {
+        "name": "amount",
+        "type": "uint256"
+    }
+]
