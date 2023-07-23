@@ -1,0 +1,50 @@
+{
+  "name": "coolgraph",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.14",
+    "@ethereum-attestation-service/eas-contracts": "^0.27.1",
+    "@ethereum-attestation-service/eas-sdk": "^0.28.2",
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
+    "@lighthouse-web3/sdk": "^0.2.5",
+    "@rainbow-me/rainbowkit": "^1.0.7",
+    "@types/node": "20.1.2",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "@types/three": "^0.152.0",
+    "@walletconnect/ethereum-provider": "^2.9.1",
+    "axios": "^1.4.0",
+    "blockies": "^0.0.2",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.1",
+    "ethereum-blockies": "^0.1.1",
+    "ethers": "^5.7.2",
+    "graphql": "^16.6.0",
+    "next": "13.4.1",
+    "react": "18.2.0",
+    "react-blockies": "^1.4.1",
+    "react-dom": "18.2.0",
+    "react-force-graph-2d": "^1.25.0",
+    "react-force-graph-3d": "^1.23.0",
+    "react-modal": "^3.16.1",
+    "react-transition-group": "^4.4.5",
+    "three": "^0.152.2",
+    "three-spritetext": "^1.8.1",
+    "typescript": "5.0.4",
+    "web3": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/react-transition-group": "^4.4.6",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
+  }
+}

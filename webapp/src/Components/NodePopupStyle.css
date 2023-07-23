@@ -1,0 +1,30 @@
+/* popupStyles.css */
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .popup h2 {
+    margin-bottom: 10px;
+  }
+  .popup p {
+    margin-bottom: 5px;
+  }
+  .popup button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+    align-items: center;
+  }
+  
