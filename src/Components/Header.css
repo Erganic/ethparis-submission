@@ -1,16 +1,27 @@
 .header {
-    background-color: #f1f1f1;
-    padding: 1rem;
-  }
-  
-  nav {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    padding: 0;
-  }
-  
-  nav li {
-    margin: 0 1rem;
-    cursor: pointer;
-  }
+  background-color: #5378f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.centered-text {
+  flex: 1; /* Use flex: 1 to occupy available space and center the text */
+  text-align: center; /* Center the text horizontally */
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 600;
+}
+
+.connect-button-container {
+  margin-left: 1rem; /* Add some left margin to separate the button from the text */
+}
+
+/* Add styles for the ConnectButton if needed */
+.connect-button {
+  /* Custom styles for the ConnectButton can be added here */
+  cursor: pointer;
+  background: #b72bef;
+  color: rgb(207, 112, 233);
+}

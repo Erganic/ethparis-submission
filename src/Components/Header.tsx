@@ -5,7 +5,10 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 const Header: React.FC = () => {
   return (
     <header className="header">
-      <ConnectButton />
+      <div className="centered-text">Erganism</div>
+      <div className="connect-button-container">
+        <ConnectButton />
+      </div>
     </header>
   );
 };
